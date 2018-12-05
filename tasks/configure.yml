@@ -6,7 +6,7 @@
     owner: "{{ item.owner|default(omit) }}"
     group: "{{ item.group|default(omit) }}"
     state: directory
-  with_items: "{{ samba_shares }}"
+  loop: "{{ samba_shares }}"
 
 - name: configure Samba
   template:
@@ -22,6 +22,6 @@
     (pdbedit -L | grep {{ item.key }} 2>&1 > /dev/null) \
     || (echo {{ item.value }}; echo {{ item.value }}) \
     | smbpasswd -s -a {{ item.key }}
-  with_dict: "{{ samba_users }}"
+  loop: "{{ samba_users|dict2items }}"
   register: samba_create_user_output
   changed_when: "'Added user' in samba_create_user_output.stdout"
