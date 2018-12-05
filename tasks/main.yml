@@ -2,8 +2,9 @@
 - include_vars: "{{lookup('first_found', params)}}"
   vars:
     params:
-      - "{{ ansible_os_family|lower }}.yml"
-      - "default.yml"
+      files:
+        - "{{ ansible_os_family|lower }}.yml"
+        - "default.yml"
 
 - include: install_debian.yml
   when: ansible_os_family == 'Debian'
