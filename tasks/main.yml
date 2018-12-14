@@ -5,6 +5,10 @@
       files:
         - "{{ ansible_os_family|lower }}.yml"
         - "default.yml"
+      paths:
+        - 'vars'
+  tags:
+    - samba
 
 - include: install_debian.yml
   when: ansible_os_family == 'Debian'
