@@ -17,7 +17,7 @@
   notify:
     - restart samba server
 
-- name: create Samba users
+- name: create Samba users # noqa 306
   shell: >
     (pdbedit -L | grep {{ item.key }} 2>&1 > /dev/null) \
     || (echo {{ item.value }}; echo {{ item.value }}) \

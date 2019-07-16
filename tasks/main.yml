@@ -1,5 +1,6 @@
 ---
-- include_vars: "{{lookup('first_found', params)}}"
+- name: get system parameters for samba
+  include_vars: "{{ lookup('first_found', params) }}"
   vars:
     params:
       files:
